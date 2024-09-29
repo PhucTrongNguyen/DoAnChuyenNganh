@@ -15,9 +15,15 @@ class Product extends Model
         'proc_id',
         'cate_id',
         'name',
+        'description',
         'quantity',
         'price',
         'picture',
+        'rating',
+        'sales',
+        'status',
+        'discount',
+        'sku',
     ];
 
     // Khai báo khóa chính là proc_id

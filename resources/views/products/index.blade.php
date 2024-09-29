@@ -1,6 +1,7 @@
 @extends('Layout.app')
 
 @section('content')
+<div class="container-content">
     <!-- Main Content -->
     <main class="container mt-4">
         <!-- Featured Image -->
@@ -46,48 +47,51 @@
                     <!-- Featured Products -->
                     <div class="tab-pane fade show active" id="feat" role="tabpanel" aria-labelledby="feat-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
+                            @foreach($featuredProducts as $product)
                             <div class="col">
                                 <div class="card">
-                                    <img src="https://via.placeholder.com/100" class="card-img-top" alt="Product">
+                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">$199.99</h5>
-                                        <p class="card-text">Name of product</p>
+                                        <h5 class="card-title">${{ $product->price }}</h5>
+                                        <p class="card-text">{{ $product->name }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Thêm nhiều sản phẩm khác -->
+                            @endforeach
                         </div>
                     </div>
 
                     <!-- Best Sale Products -->
                     <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
+                            @foreach($bestSaleProducts as $product)
                             <div class="col">
                                 <div class="card">
-                                    <img src="https://via.placeholder.com/100" class="card-img-top" alt="Product">
+                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">$49.99</h5>
-                                        <p class="card-text">Name of product</p>
+                                        <h5 class="card-title">${{ $product->price }}</h5>
+                                        <p class="card-text">{{ $product->name }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Thêm nhiều sản phẩm khác -->
+                            @endforeach
                         </div>
                     </div>
 
                     <!-- Best Rated Products -->
                     <div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
+                            @foreach($bestRatedProducts as $product)
                             <div class="col">
                                 <div class="card">
-                                    <img src="https://via.placeholder.com/100" class="card-img-top" alt="Product">
+                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">$99.99</h5>
-                                        <p class="card-text">Name of product</p>
+                                        <h5 class="card-title">${{ $product->price }}</h5>
+                                        <p class="card-text">{{ $product->name }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Thêm nhiều sản phẩm khác -->
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -98,26 +102,20 @@
         <section>
             <h2>Hot New Arrivals</h2>
             <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
+                @foreach($hotNewArrivals as $product)
                 <div class="col">
                     <div class="card">
-                        <img src="https://via.placeholder.com/100" class="card-img-top" alt="Product">
+                        <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
                         <div class="card-body">
-                            <h5 class="card-title">$99.99</h5>
-                            <p class="card-text">Name of product</p>
+                            <h5 class="card-title">${{ $product->price }}</h5>
+                            <p class="card-text">{{ $product->name }}</p>
                         </div>
                     </div>
                 </div>
-                <!-- Add more product cards here -->
-                <div class="col">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/100" class="card-img-top" alt="Product">
-                        <div class="card-body">
-                            <h5 class="card-title">$99.99</h5>
-                            <p class="card-text">Name of product</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </section>
     </main>
+</div>
+
 @endsection

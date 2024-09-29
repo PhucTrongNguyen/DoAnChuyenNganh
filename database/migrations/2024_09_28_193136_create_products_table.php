@@ -15,9 +15,15 @@ return new class extends Migration
             $table->char('proc_id', 5)->primary();
             $table->char('cate_id', 5)->nullable();
             $table->string('name', 100)->nullable();
+            $table->text('description')->nullable(); // Mô tả sản phẩm
             $table->integer('quantity')->nullable();
             $table->float('price')->nullable();
             $table->text('picture')->nullable();
+            $table->float('rating')->nullable(); // Điểm đánh giá
+            $table->integer('sales')->default(0); // Số lượng đã bán
+            $table->string('status')->default('active'); // Trạng thái sản phẩm
+            $table->float('discount')->nullable(); // Phần trăm giảm giá
+            $table->string('sku')->nullable(); // Số SKU
             $table->timestamps();
             $table->softDeletes();
         });

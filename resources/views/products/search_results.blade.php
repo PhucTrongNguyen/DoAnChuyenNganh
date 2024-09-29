@@ -1,7 +1,7 @@
 @extends('Layout.app')
 
 @section('content')
-<div class="container">
+<div class="container container-content">
     <h1>Kết quả tìm kiếm</h1>
     @if ($products->isEmpty())
         <p>Không có sản phẩm nào được tìm thấy.</p>
