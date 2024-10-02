@@ -6,7 +6,7 @@
     <main class="container mt-4">
         <!-- Featured Image -->
         <section class="mb-4">
-            <img src="https://via.placeholder.com/1920x906" class="img-fluid" alt="Featured product">
+            <img src="https://via.placeholder.com/1920x506" class="img-fluid" alt="Featured product">
         </section>
 
         <!-- Deals of the Week -->

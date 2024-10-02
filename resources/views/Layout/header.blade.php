@@ -18,6 +18,10 @@
                         </div>
                     </form>
                 </div>
+                <!-- Phần tử này để hiển thị kết quả tìm kiếm -->
+                <div id="ketquatim" class="position-absolute bg-white w-100 shadow mt-2" style="z-index: 1000; display: none;">
+                    <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
+                </div>
 
                 <span class="me-2">
                     <a href="#" class="text-decoration-none text-dark btn btn-outline-secondary border-0">
@@ -34,7 +38,7 @@
 
         <!-- Authentication Links -->
         <div class="d-flex align-items-center">
-            <a href="#" class="me-2 text-dark btn btn-outline-secondary border-0">Login | Register</a>
+            <a href="/login" class="me-2 text-dark btn btn-outline-secondary border-0">Login | Register</a>
         </div>
     </div>
 
@@ -43,16 +47,13 @@
         <div class="container">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Shop</a>
+                    <a class="nav-link text-white" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Contact</a>
+                    <a class="nav-link text-white" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Try-virtual</a>
