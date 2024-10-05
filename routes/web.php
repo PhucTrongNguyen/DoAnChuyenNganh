@@ -13,8 +13,8 @@ Route::get('/products/search', [ProductController::class, 'search'])->name('prod
 
 Route::get('/login', [AuthController::class, 'login'])->name('Auth.login');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
-    Route::post('/profile/update', [ProfileController::class, 'updateProfileAndAddress'])->name('profile.update');
-});
+Route::get('/profile', [ProfileController::class, 'profile'])->name('Profile.profile');
+Route::post('/profile/update', [ProfileController::class, 'updateProfileAndAddress'])->name('profile.update');
+
+
 
