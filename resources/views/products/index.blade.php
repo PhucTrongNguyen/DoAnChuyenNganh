@@ -44,56 +44,88 @@
                 </ul>
 
                 <div class="tab-content" id="productTabContent">
+
                     <!-- Featured Products -->
                     <div class="tab-pane fade show active" id="feat" role="tabpanel" aria-labelledby="feat-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
                             @foreach($featuredProducts as $product)
-                            <div class="col">
-                                <div class="card">
-                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${{ $product->price }}</h5>
-                                        <p class="card-text">{{ $product->name }}</p>
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${{ $product->price }}</h5>
+                                            <p class="card-text">{{ $product->name }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                @if ($loop->iteration % 12 == 0) <!-- Kiểm tra xem có đủ 12 sản phẩm không -->
+                                    @break
+                                @endif
                             @endforeach
                         </div>
+
+                        <!-- Pagination Dots -->
+                        <ul class="pagination-dots">
+                            @for($i = 0; $i < ceil($featuredProducts->count() / 12); $i++)
+                                <li class="{{ $i == 0 ? 'active' : '' }}" data-page="{{ $i }}"></li>
+                            @endfor
+                        </ul>
                     </div>
 
                     <!-- Best Sale Products -->
                     <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
                             @foreach($bestSaleProducts as $product)
-                            <div class="col">
-                                <div class="card">
-                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${{ $product->price }}</h5>
-                                        <p class="card-text">{{ $product->name }}</p>
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${{ $product->price }}</h5>
+                                            <p class="card-text">{{ $product->name }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                @if ($loop->iteration % 12 == 0) <!-- Kiểm tra xem có đủ 12 sản phẩm không -->
+                                    @break
+                                @endif
                             @endforeach
                         </div>
+
+                        <!-- Pagination Dots -->
+                        <ul class="pagination-dots">
+                            @for($i = 0; $i < ceil($bestSaleProducts->count() / 12); $i++)
+                                <li class="{{ $i == 0 ? 'active' : '' }}" data-page="{{ $i }}"></li>
+                            @endfor
+                        </ul>
                     </div>
 
                     <!-- Best Rated Products -->
                     <div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">
                         <div class="row row-cols-2 row-cols-md-3 g-4 mt-3">
                             @foreach($bestRatedProducts as $product)
-                            <div class="col">
-                                <div class="card">
-                                    <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${{ $product->price }}</h5>
-                                        <p class="card-text">{{ $product->name }}</p>
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${{ $product->price }}</h5>
+                                            <p class="card-text">{{ $product->name }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                @if ($loop->iteration % 12 == 0) <!-- Kiểm tra xem có đủ 12 sản phẩm không -->
+                                    @break
+                                @endif
                             @endforeach
                         </div>
+
+                        <!-- Pagination Dots -->
+                        <ul class="pagination-dots">
+                            @for($i = 0; $i < ceil($bestRatedProducts->count() / 12); $i++)
+                                <li class="{{ $i == 0 ? 'active' : '' }}" data-page="{{ $i }}"></li>
+                            @endfor
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -103,18 +135,29 @@
             <h2>Hot New Arrivals</h2>
             <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
                 @foreach($hotNewArrivals as $product)
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">${{ $product->price }}</h5>
-                            <p class="card-text">{{ $product->name }}</p>
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('images/' . $product->picture) }}" class="card-img-top" alt="{{ $product->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">${{ $product->price }}</h5>
+                                <p class="card-text">{{ $product->name }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @if ($loop->iteration % 4 == 0) <!-- Kiểm tra xem có đủ 4 sản phẩm không -->
+                        @break
+                    @endif
                 @endforeach
             </div>
+
+            <!-- Pagination Dots -->
+            <ul class="pagination-dots">
+                @for($i = 0; $i < ceil($hotNewArrivals->count() / 4); $i++)
+                    <li class="{{ $i == 0 ? 'active' : '' }}" data-page="{{ $i }}"></li>
+                @endfor
+            </ul>
         </section>
+
     </main>
 </div>
 

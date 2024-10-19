@@ -56,6 +56,9 @@
                     <a class="nav-link text-white" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="/order-history">Order</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="#">Try-virtual</a>
                 </li>
             </ul>
