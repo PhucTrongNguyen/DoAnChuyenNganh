@@ -46,16 +46,18 @@
                             </thead>
                             <tbody>
                             @foreach ($ds as $item)
+                                @foreach ($item->sanPhams as $sp)
                                     <tr>
+                                        
                                         <td>{{ $index++ }}</td>
                                         <td>{{$item->khachHang->TenKH}}</td>
-                                        @foreach ($item->sanPhams as $sp)
                                         <td>{{$sp->TenSP}}</td>
-                                        @endforeach
                                         <td>{{$item->NgayTaoDS}}</td>
                                         <td>{{$item->NgaySuaDS}}</td>
                                         <td>{{$item->NgayXoaDS}}</td>
+                                        
                                     </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -66,4 +68,5 @@
         </div>
     </div>
 </section>
+@endif
 @endsection

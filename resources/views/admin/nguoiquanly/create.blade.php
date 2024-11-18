@@ -99,25 +99,6 @@
                                 @endif
                             </div>
                         </div>
-                        <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">Trạng thái tài khoản</legend>
-                            <div class="col-sm-10">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="TrangThaiSP" id="TrangThaiSP"
-                                        value="1" checked>
-                                    <label class="form-check-label" for="TrangThaiSP">
-                                        Có hàng
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="TrangThaiSP" id="TrangThaiSP"
-                                        value="0">
-                                    <label class="form-check-label" for="TrangThaiSP">
-                                        Chưa có hàng
-                                    </label>
-                                </div>
-                            </div>
-                        </fieldset>
 
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label">Thêm</label>

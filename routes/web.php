@@ -150,19 +150,20 @@ Route::put('/donhang/{MaDH}/updateStatus', [DonHangController::class, 'updateSta
 
 //User
 //SanPham
-Route::get('/', [SanPhamController::class, 'index']);
+//Route::get('/', [SanPhamController::class, 'index']);
 Route::get('/products/search', [SanPhamController::class, 'search'])->name('products.search');
 //Login
 //Route::get('/login', [AuthController::class, 'login'])->name('Auth.login');
 //HoSo
-Route::group(['middleware' => ['check.session']], function () {
-    Route::get('/hoso', [KhachHangController::class, 'profile'])->name('hoso.profile');
-    Route::get('/profile/create', [KhachHangController::class, 'create'])->name('hoso.create');
-    Route::put('/profile', [KhachHangController::class, 'store'])->name('hoso.store');
-    Route::get('/profile/edit/{id}', [KhachHangController::class, 'edit'])->name('hoso.edit');
-    Route::put('/profile/{id}', [KhachHangController::class, 'update'])->name('hoso.update');
-});
+// Route::group(['middleware' => ['check.session']], function () {
+    
+// });
 
+Route::get('/hoso', [KhachHangController::class, 'profile'])->name('hoso.profile');
+Route::get('/profile/create', [KhachHangController::class, 'create'])->name('hoso.create');
+Route::put('/profile', [KhachHangController::class, 'store'])->name('hoso.store');
+Route::get('/profile/edit/{id}', [KhachHangController::class, 'edit'])->name('hoso.edit');
+Route::put('/profile/{id}', [KhachHangController::class, 'update'])->name('hoso.update');
 
 Auth::routes();
 

@@ -1,7 +1,7 @@
-<div class="position-absolute top-50 start-50 translate-middle bg-light p-5 rounded-4">
-<button class="btn btn-primary position-absolute" style="top: 10px; right: 10px;" onclick="closeLoginForm()">
-<i class="fa-solid fa-xmark"></i>
-</button>
+<div class="position-fixed top-50 start-50 translate-middle bg-light p-5 rounded-4" style="z-index: 999">
+    <button class="btn btn-primary position-absolute" style="top: 10px; right: 10px;" onclick="closeLoginForm()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
     <div class="row">
         <div class="col-6">
             <form class="" action="{{route('login')}}" method="POST">
@@ -38,11 +38,11 @@
                     </div>
                 </div>
             </form>
-            
+
         </div>
         <div class="col-6">
             <img src="{{ URL('img/background_login.jpg') }}" class="img-thumbnail border-0" alt="...">
         </div>
     </div>
-<!--{{ route('password.request')}}-->
+    <!--{{ route('password.request')}}-->
 </div>

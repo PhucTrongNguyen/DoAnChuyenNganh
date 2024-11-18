@@ -21,39 +21,30 @@ class SanPhamController extends Controller
     //
     public function index(Request $request)
     {
-        $tab = $request->get('tab', 'feat'); // Lấy tab hiện tại, mặc định là 'feat'
+        //dd($request->ajax()); // Kiểm tra xem có phải AJAX request hay không
         $page = $request->get('page', 1);    // Lấy trang hiện tại, mặc định là 1
         //dd($page);
         // Lấy sản phẩm theo tab
-        if ($tab == 'feat') {
-            $sp = SanPham::with('loaiSanPham')->paginate(6, ['*'], 'page', $page);
-        } elseif ($tab == 'sale') {
-            // Logic cho tab sale
-            $sp = SanPham::with('loaiSanPham')->paginate(6, ['*'], 'page', $page); // Ví dụ
-        } elseif ($tab == 'best') {
-            // Logic cho tab best
-            $sp = SanPham::with('loaiSanPham')->paginate(6, ['*'], 'page', $page); // Ví dụ
-        }
+        $sp = SanPham::with('loaiSanPham')->paginate(6, ['*'], 'page', $page);
         //dd($sp);
         $hot = SanPham::all();
         if (session()->has('MaKH')) {
             $kh = session()->get('MaKH');
             if ($request->ajax()) {
-                return view("user.sanpham.product-list", compact('sp', 'hot'))->render();
+                //dd($sp);
+                return response()->json([
+                    'html' => view('user.sanpham.product-list', compact('sp'))->render(),
+                ]);
             }
-            //$sp = SanPham::with('loaiSanPham')->paginate(3);
-            return view("user.sanpham.index", compact('sp', 'tab', 'hot'));
+            return view("user.sanpham.index", compact('sp', 'hot'));
         } elseif (session()->has('MaQL')) {
             $ql = NguoiQuanLy::where('MaQL', session()->get('MaQL'))->first();
             $sp = SanPham::with('loaiSanPham')->get();
             return view("admin.sanpham.review", compact('sp', 'ql'));
         }
         
-        if ($request->ajax()) {
-            return view("user.sanpham.product-list", compact('sp', 'hot'))->render();
-        }
         $kh = session()->has('MaKH') ? session()->get('MaKH') : null;
-        return view("user.sanpham.index", compact('sp', 'tab', 'hot'));
+        return view("user.sanpham.index", compact('sp', 'hot'));
     }
 
     public function getproductinfo($id)

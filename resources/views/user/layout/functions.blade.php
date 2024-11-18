@@ -55,10 +55,12 @@
         <i class="fa-solid fa-cart-shopping"></i>
     </button>
 @endif
-<form id="image-form" method="post" enctype="multipart/form-data" action="{{ route('run.python.script') }}">
+<img class="glasses-image" style="display: none" src="{{asset($item->AnhSP)}}" alt="Glasses 1" />
+<button class="try-on-btn btn btn-success mx-1"><i class="fa-solid fa-camera"></i></button>
+<!-- <form id="image-form" method="post" enctype="multipart/form-data" action="{{ route('run.python.script') }}">
     @csrf
     <input type="hidden" name="image_path" value="{{$item->AnhSP}}">
     <button type="submit" id="submit-btn" class="btn btn-success mx-1">
         <i class="fa-solid fa-camera"></i>
     </button>
-</form>
+</form> -->

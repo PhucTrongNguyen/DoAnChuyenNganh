@@ -65,7 +65,7 @@
                                                 <button type="submit" class="btn btn-danger">Xóa</button>
                                             </form>
                                         </td>
-                                        <td>{{index++}}</td>
+                                        <td>{{$index++}}</td>
                                         <td>{{$item->TenQL}}</td>
                                         <td>{{$item->GioiTinh}}</td>
                                         <td>{{$item->NgaySinh}}</td>

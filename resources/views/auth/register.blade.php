@@ -1,4 +1,4 @@
-<div class="position-absolute top-50 start-50 translate-middle bg-light p-5 rounded-4">
+<div class="position-fixed top-50 start-50 translate-middle bg-light p-5 rounded-4" style="z-index: 999">
     <button class="btn btn-primary position-absolute" style="top: 10px; right: 10px;" onclick="closeRegisterForm()">
         <i class="fa-solid fa-xmark"></i>
     </button>

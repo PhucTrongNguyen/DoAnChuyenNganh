@@ -1,0 +1,18 @@
+2024-11-11 10:53:41,752 INFO:File shape_predictor_68_face_landmarks.dat \u0111ã t\u1ed3n t\u1ea1i, không c\u1ea7n t\u1ea3i.
+2024-11-11 10:53:43,999 INFO:T\u1ea3i thành công predictor!
+2024-11-11 11:06:48,211 INFO:Found credentials in environment variables.
+2024-11-11 11:07:35,022 ERROR:L\u1ed7i khi t\u1ea3i dlib predictor: __init__(): incompatible constructor arguments. The following argument types are supported:
+    1. _dlib_pybind11.shape_predictor()
+    2. _dlib_pybind11.shape_predictor(arg0: str)
+
+Invoked with: <_io.BytesIO object at 0x0000025FFF778900>
+2024-11-11 11:17:53,207 INFO:Found credentials in environment variables.
+2024-11-11 11:18:13,912 ERROR:L\u1ed7i khi t\u1ea3i dlib predictor: __init__(): incompatible constructor arguments. The following argument types are supported:
+    1. _dlib_pybind11.shape_predictor()
+    2. _dlib_pybind11.shape_predictor(arg0: str)
+
+Invoked with: <_io.BytesIO object at 0x000001F279E18950>
+2024-11-11 11:24:40,095 ERROR:L\u1ed7i khi t\u1ea3i dlib predictor: Unable to open https://websellglassespvc.s3.amazonaws.com/shape_predictor_68_face_landmarks.dat
+2024-11-11 16:06:08,977 INFO:T\u1ea3i thành công predictor!
+2024-11-17 23:39:04,090 INFO:T\u1ea3i thành công predictor!
+2024-11-17 23:39:53,548 INFO:T\u1ea3i thành công predictor!

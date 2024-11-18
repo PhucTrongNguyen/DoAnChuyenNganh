@@ -57,8 +57,8 @@
                             <tbody>
                                 @foreach ($kh as $item)
                                     <tr>
-                                        <td>{{index++}}</td>
-                                        <td><img src="{{$item->TenKH}}" alt=""></td>
+                                        <td>{{$index++}}</td>
+                                        <td>{{$item->TenKH}}</td>
                                         <td>{{$item->GioiTinh}}</td>
                                         <td>{{$item->NgaySinh}}</td>
                                         <td>{{$item->Email}}</td>
@@ -66,7 +66,7 @@
                                         <td>{{$item->MatKhau}}</td>
                                         <td>{{$item->Google_id}}</td>
                                         <td>
-                                            @foreach ($kh->diaChis as $diachi)
+                                            @foreach ($item->diaChis as $diachi)
                                             @if ($diachi->LoaiDC == "Địa chỉ giao hàng")
                                             Địa chỉ giao hàng: {{$diachi->ThongTinDC}}<br>
                                             @else

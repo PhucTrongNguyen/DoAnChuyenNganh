@@ -3,8 +3,12 @@ import cv2
 import numpy as np
 import dlib
 import sys
+import boto3
+import os
 from PIL import Image, ImageTk
 import tkinter as tk
+import logging
+import io
 
 class WebcamApp:
     def __init__(self, window):
@@ -15,9 +19,18 @@ class WebcamApp:
         self.video_capture = cv2.VideoCapture(0)
         self.stop_flag = False
 
+        # Cấu hình ghi log
+        logging.basicConfig(filename='app.log', level=logging.INFO,
+                    format='%(asctime)s %(levelname)s:%(message)s')
+
         # Load dlib's face detector and facial landmark predictor
-        self.detector = dlib.get_frontal_face_detector()
-        self.predictor = dlib.shape_predictor("D:\\Hufi\\HK07\\DoAnChuyenNganh\\Ecommerce-Glasses\\websitebankinhthoitrang\\public\\python\\shape_predictor_68_face_landmarks.dat")
+        try:
+            self.detector = dlib.get_frontal_face_detector()
+            self.predictor = dlib.shape_predictor("D:\\Hufi\\HK07\\DoAnChuyenNganh\\Ecommerce-Glasses\\websitebankinhthoitrang\\public\\shape_predictor_5_face_landmarks.dat")
+            logging.info("Tải thành công predictor!")
+        except Exception as e:
+            logging.error(f"Lỗi khi tải dlib predictor: {e}")
+            raise
 
         # Nhận đường dẫn ảnh từ tham số dòng lệnh
         image_path = sys.argv[1]
@@ -109,35 +122,7 @@ class WebcamApp:
                     # Kết hợp nền và kính
                     final_image = cv2.add(background, glasses)
                     return final_image
-                    # 4. Draw glasses on the face
-                    # for c in range(0, 3):  # Dùng cho 3 kênh màu (BGR)
-                    #     image[glass_y:glass_y + resize_glasses.shape[0], glass_x:glass_x + resize_glasses.shape[1], c] = \
-                    #         (resize_glasses[:, :, c] * (resize_glass_alpha / 255.0) + 
-                    #         image[glass_y:glass_y + resize_glasses.shape[0], glass_x:glass_x + resize_glasses.shape[1], c] * (1.0 - resize_glass_alpha / 255.0))
-                    #image = np.ones(image.shape, np.uint8) * 255
-                    # roi = image[glass_y:glass_y + resize_glasses.shape[0], glass_x:glass_x + resize_glasses.shape[1]]
-
-                    # # Extract background (non-glasses part) using the alpha channel as a mask
-                    # glasses_area = cv2.bitwise_and(roi, roi, mask=cv2.bitwise_not(resize_glass_alpha))
-
-                    # # Combine the glasses image and the background
-                    # final_glasses = cv2.add(glasses_area, resize_glasses)
-
-                    # image[int(glass_y):int(glass_y + resize_glasses.shape[0]),
-                    #             int(glass_x):int(glass_x + resize_glasses.shape[1])] = final_glasses
-
-                    # gray_overlay = cv2.cvtColor(overlay_image, cv2.COLOR_BGR2GRAY)
-                    # _, mask = cv2.threshold(gray_overlay, 127, 255, cv2.THRESH_BINARY)
-
-                    # # Extract background and face (except glasses) from original image
-                    # background = cv2.bitwise_and(image, image, mask=mask)
-
-                    # mask_inv = cv2.bitwise_not(mask)
-
-                    # # Extract glasses from overlay
-                    # glasses = cv2.bitwise_and(overlay_image, overlay_image, mask=mask_inv)
-
-                    # final_image = cv2.add(background, glasses)
+                    
         return image
     
     def close_program(self):
@@ -149,65 +134,3 @@ class WebcamApp:
 root = tk.Tk()
 app = WebcamApp(root)
 root.mainloop()
-
-# while True:
-#     ret, image = vid.read()
-#     if ret:
-#         final_image = image
-
-#         # 1. Face detection using dlib
-#         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#         faces = detector(gray_image)
-
-#         for face in faces:
-#             # 2. Get landmarks
-#             landmarks = predictor(gray_image, face)
-
-#             # Extract eye coordinates
-#             left_eye_x = landmarks.part(36).x
-#             left_eye_y = landmarks.part(36).y
-#             right_eye_x = landmarks.part(45).x
-#             right_eye_y = landmarks.part(45).y
-
-#             # Calculate centers of eyes
-#             eye_centers = [(left_eye_x, left_eye_y), (right_eye_x, right_eye_y)]
-
-#             # 3. Calculate coordinates and size of glasses
-#             glass_width_resize = 1.5 * abs(eye_centers[1][0] - eye_centers[0][0])
-#             scale_factor = glass_width_resize / glass_image.shape[1]
-
-#             # Resize the glasses image and the alpha channel
-#             resize_glasses = cv2.resize(glass_image, None, fx=scale_factor, fy=scale_factor)
-#             resize_glass_alpha = cv2.resize(glass_alpha, None, fx=scale_factor, fy=scale_factor)
-
-#             # Calculate position of the glasses
-#             glass_x = int((eye_centers[0][0] + eye_centers[1][0]) / 2 - resize_glasses.shape[1] / 2)
-#             glass_y = int((eye_centers[0][1] + eye_centers[1][1]) / 2 - resize_glasses.shape[0] / 2)
-
-#             # Ensure glasses stay within the image bounds
-#             if glass_x >= 0 and glass_y >= 0 and glass_x + resize_glasses.shape[1] <= image.shape[1] and glass_y + resize_glasses.shape[0] <= image.shape[0]:
-#                 # 4. Draw glasses on the face
-#                 overlay_image = np.ones(image.shape, np.uint8) * 255
-#                 overlay_image[int(glass_y):int(glass_y + resize_glasses.shape[0]),
-#                               int(glass_x):int(glass_x + resize_glasses.shape[1])] = resize_glasses
-
-#                 gray_overlay = cv2.cvtColor(overlay_image, cv2.COLOR_BGR2GRAY)
-#                 _, mask = cv2.threshold(gray_overlay, 127, 255, cv2.THRESH_BINARY)
-
-#                 # Extract background and face (except glasses) from original image
-#                 background = cv2.bitwise_and(image, image, mask=mask)
-
-#                 mask_inv = cv2.bitwise_not(mask)
-
-#                 # Extract glasses from overlay
-#                 glasses = cv2.bitwise_and(overlay_image, overlay_image, mask=mask_inv)
-
-#                 final_image = cv2.add(background, glasses)
-
-#         cv2.imshow("Model", final_image)
-
-#     if cv2.waitKey(1) == ord('q'):
-#         break
-
-# cv2.destroyAllWindows()
-# vid.release()

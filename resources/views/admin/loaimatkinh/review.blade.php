@@ -23,57 +23,58 @@
 </div><!-- End Page Title -->
 
 <section class="section">
-@if (!empty($lmk) && count($lmk) > 0)
-@php    $index = 1; @endphp
-    <div class="row">
-        <div class="col-lg-12">
+    @if (!empty($lmk) && count($lmk) > 0)
+            @php    $index = 1; @endphp
+            <div class="row">
+                <div class="col-lg-12">
 
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Loại mắt kính</h5>
-                    <a href="{{ route('loaimatkinh.create') }}" class="btn btn-primary mb-3">Thêm loại mắt kính</a>
-                    <a href="{{ route('loaimatkinh.restore') }}" onclick="return confirmRestore()" class="btn btn-primary mb-3">Phục hồi loại mắt kính</a>
-                    <!-- Table with stripped rows -->
-                    <div style="overflow-x: auto">
-                        <table class="table datatable" style="table-layout: auto; width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Thao tác</th>
-                                    <td>STT</td>
-                                    <th>Tên Loại</th>
-                                    <th data-type="date" data-format="YYYY/DD/MM">Ngày tạo</th>
-                                    <th data-type="date" data-format="YYYY/DD/MM">Ngày sửa</th>
-                                    <th data-type="date" data-format="YYYY/DD/MM">Ngày xoá</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($lmk as $item)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('loaimatkinh.edit', $item->MaLoai) }}"
-                                                class="btn btn-warning">Sửa</a>
-                                            <form action="{{ route('loaimatkinh.destroy', $item->MaLoai) }}" method="POST"
-                                                style="display:inline-block;" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Xóa</button>
-                                            </form>
-                                        </td>
-                                        <td>{{index++}}</td>
-                                        <td>{{$item->TenLoai}}</td>
-                                        <td>{{$item->NgayTaoLoaiMK}}</td>
-                                        <td>{{$item->NgaySuaLoaiMK}}</td>
-                                        <td>{{$item->NgayXoaLoaiMK}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Loại mắt kính</h5>
+                            <a href="{{ route('loaimatkinh.create') }}" class="btn btn-primary mb-3">Thêm loại mắt kính</a>
+                            <a href="{{ route('loaimatkinh.restore') }}" onclick="return confirmRestore()"
+                                class="btn btn-primary mb-3">Phục hồi loại mắt kính</a>
+                            <!-- Table with stripped rows -->
+                            <div style="overflow-x: auto">
+                                <table class="table datatable" style="table-layout: auto; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Thao tác</th>
+                                            <td>STT</td>
+                                            <th>Tên Loại</th>
+                                            <th data-type="date" data-format="YYYY/DD/MM">Ngày tạo</th>
+                                            <th data-type="date" data-format="YYYY/DD/MM">Ngày sửa</th>
+                                            <th data-type="date" data-format="YYYY/DD/MM">Ngày xoá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($lmk as $item)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('loaimatkinh.edit', $item->MaLoai) }}"
+                                                        class="btn btn-warning">Sửa</a>
+                                                    <form action="{{ route('loaimatkinh.destroy', $item->MaLoai) }}" method="POST"
+                                                        style="display:inline-block;" onsubmit="return confirmDelete()">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                                    </form>
+                                                </td>
+                                                <td>{{$index++}}</td>
+                                                <td>{{$item->TenLoai}}</td>
+                                                <td>{{$item->NgayTaoLoaiMK}}</td>
+                                                <td>{{$item->NgaySuaLoaiMK}}</td>
+                                                <td>{{$item->NgayXoaLoaiMK}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
-
-        </div>
-    </div>
-</section>
-@endif
+        </section>
+    @endif
 @endsection

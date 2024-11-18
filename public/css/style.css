@@ -1313,49 +1313,31 @@ h6 {
   vertical-align: middle;
 }
 
+#overlay {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .loader-div {
   display: none;
-  position: fixed;
-  margin: 0px;
-  padding: 0px;
-  right: 0px;
-  top: 0px;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: #fff;
   z-index: 30001;
   opacity: 0.8;
-}
-.loader-img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-/* CSS cho overlay form đăng nhập */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Mờ nền */
-  display: flex;
-  justify-content: center;
+  border-radius: 5px;
   align-items: center;
-  z-index: 1000; /* Đảm bảo form luôn nằm trên */
+  justify-content: center;
 }
 
-.overlay-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.loader-img {
+  width: 50px; /* Kích thước của ảnh loader */
+  height: 50px;
+  margin: auto;
 }
 
 .out-of-stock {
@@ -1375,4 +1357,72 @@ h6 {
   font-weight: bold;
   text-align: center;
   border-radius: 5px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#virtual-try-on-window {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 30000;
+}
+
+.try-on-window {
+  position: relative;
+  /* Thay đổi từ absolute sang relative */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 640px;
+  height: 480px;
+  background-color: #fff;
+  /* Đặt nền trắng cho khung */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+video#webcam {
+  width: 100%;
+  /* Đảm bảo video chiếm toàn bộ khung */
+  height: auto;
+  border-radius: 10px;
+}
+
+.button-container {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#stop-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ff4d4d; /* Màu đỏ nổi bật cho nút */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#chitietsanpham {
+  display: none; /* Ẩn thẻ này ban đầu */
+  transition: all 0.5s ease;
+}
+
+.badge {
+  display: inline-block; /* Đảm bảo thẻ hiển thị */
 }

@@ -37,11 +37,11 @@
                     </div>
                     <!-- Nút tạo thêm địa chỉ khác -->
                     <button type="button" id="add-address-btn" class="btn btn-primary mt-3">
-                    {{ translateText('Tạo hồ sơ và địa chỉ')}}Tạo thêm địa chỉ khác
+                    {{ translateText('Tạo thêm địa chỉ khác')}}
                     </button>
                     <!-- Nút submit -->
                     <button type="submit" class="btn btn-primary mt-3">
-                    {{ translateText('Tạo hồ sơ và địa chỉ')}}Update Profile & Address
+                    {{ translateText('Cập nhật hồ sơ và địa chỉ')}}
                     </button>
                 </div>
                 <div class="col-6 address-container">

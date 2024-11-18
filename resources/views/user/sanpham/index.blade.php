@@ -36,15 +36,12 @@
                 <div class="card" id="chitietsanpham">
                     <img src="" class="card-img-top" alt="Deal product">
                     <div class="card-body">
-                        @if (function_exists('translateText'))
-                        <h5>{{translateText('Chi tiết sản phẩm')}}</h5>
-                        @endif
-                        <h5>{{ translateText('Chi tiết sản phẩm')}}</h5>
-                        <p>{{ translateText('Loại SP')}}: <strong class="card-category"></strong></p>
-                        <p>{{ translateText('Tên SP')}}: <strong class="card-title"></strong></p>
-                        <p>{{ translateText('Giá bán')}}: <strong class="card-money"></strong></p>
+                        <h5>{{ translateText('Thông tin sản phẩm')}}</h5>
+                        <p>{{ translateText('Loại')}}: <strong class="card-category"></strong></p>
+                        <p>{{ translateText('Tên')}}: <strong class="card-title"></strong></p>
+                        <p>{{ translateText('Giá')}}: <strong class="card-money"></strong></p>
                         <p>{{ translateText('Trạng thái')}}:
-                            <strong class="badge"></strong>
+                            <strong class="badge card-status"></strong>
                         </p>
                     </div>
                 </div>
@@ -52,58 +49,14 @@
 
             <!-- Product Listings -->
             <div class="col-lg-8">
-                <ul class="nav nav-tabs" id="productTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="feat-tab" data-bs-toggle="tab" data-bs-target="#feat"
-                            type="button" role="tab" aria-controls="feat"
-                            aria-selected="true">{{ translateText('Featured')}}</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="sale-tab" data-bs-toggle="tab" data-bs-target="#sale" type="button"
-                            role="tab" aria-controls="sale"
-                            aria-selected="false">{{ translateText('Best sale')}}</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="best-tab" data-bs-toggle="tab" data-bs-target="#best" type="button"
-                            role="tab" aria-controls="best"
-                            aria-selected="false">{{ translateText('Best Rated')}}</button>
-                    </li>
-                </ul>
-
-                <div class="tab-content" id="productTabContent">
-
-                    <!-- Featured Products -->
-                    <div class="tab-pane fade show active" id="feat" role="tabpanel" aria-labelledby="feat-tab">
-                        <div id="product-list">
-                            @include('user.sanpham.product-list', ['sp' => $sp])
-                        </div>
-                        <div class="pagination-links">
-                            @include('user.sanpham.pagination', ['sp' => $sp])
-                        </div>
-
-                    </div>
-
-                    <!-- Best Sale Products -->
-                    <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
-                        <div id="product-list">
-                            @include('user.sanpham.product-list', ['sp' => $sp])
-                        </div>
-                        <div class="pagination-links">
-                            @include('user.sanpham.pagination', ['sp' => $sp])
-                        </div>
-                    </div>
-
-                    <!-- Best Rated Products -->
-                    <div class="tab-pane fade" id="best" role="tabpanel" aria-labelledby="best-tab">
-                        <div id="product-list">
-                            @include('user.sanpham.product-list', ['sp' => $sp])
-                        </div>
-                        <div class="pagination-links">
-                            @include('user.sanpham.pagination', ['sp' => $sp])
-                        </div>
-                    </div>
+                <div id="product-list">
+                    @include('user.sanpham.product-list', ['sp' => $sp])
+                </div>
+                <div class="pagination-links">
+                    @include('user.sanpham.pagination', ['sp' => $sp])
                 </div>
             </div>
+
         </section>
 
         <!-- Hot New Arrivals Section -->
@@ -116,13 +69,19 @@
                             <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
                                 @foreach($products as $item)
                                     <div class="col">
-                                        <div class="card">
-                                            <div class="image-container">
-                                                <img src="{{$item->AnhSP}}" data-id="{{$item->MaSP}}"
-                                                    class="card-img-top product-img" alt="{{ $item->TenSP }}">
+                                        <div class="card" style="display: flex; flex-direction: column; height: 100%;">
+                                            <div class="image-container" style="position: relative; height: 250px; overflow: hidden;">
+                                                <img src="{{$item->AnhSP}}" class="card-img-top {{ $item->TrangThaiSP == 0 ? 'out-of-stock' : '' }}"
+                                                alt="{{ $item->TenSP }}" id="product-image" style="width: 100%; object-fit: cover;">
+                                                
+                                                @if($item->TrangThaiSP == 0)
+                                                    <div class="out-of-stock-text">{{ translateText('Hết Hàng')}}</div>
+                                                @endif
+
                                                 <div class="image-overlay">
                                                     @include('user.layout.functions', ['item' => $item])
                                                 </div>
+
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ CurrencyHelper::formatCurrency($item->GiaBan, $selectedCurrency, $selectedLocale) }}</h5>
@@ -195,61 +154,49 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const productIDs = @json($sp->pluck('MaSP'));
+    $(document).ready(function() {
+        var productIndex = 0;
+        var products = $('#product-list .card'); // Lấy danh sách các sản phẩm
+        var totalProducts = products.length; // Tổng số sản phẩm
 
-        let currentIndex = 0;
-        async function loadProductDetails() {
-            try {
-                if (currentIndex >= productIDs.length) {
-                    return; // Kết thúc nếu đã xử lý hết sản phẩm
-                }
+        // Hàm hiển thị chi tiết sản phẩm
+        async function showProductDetails(index) {
+            var product = $(products[index]);
+            var productImage = product.find('.card-img-top').attr('src');
+            var productTitle = product.find('.card-text').text();
+            var productPrice = product.find('.card-title').text();
+            var productCategory = product.find('.card-category').text();
+            var productStatus = product.find('.out-of-stock-text').length > 0 ? 'Hết hàng' : 'Còn hàng';
 
-                const MaSP = productIDs[currentIndex];
-                // Gọi API để lấy dữ liệu sản phẩm
-                const response = await fetch(`/sanpham/${MaSP}`);
-                const product = await response.json();
+            // Cập nhật nội dung chi tiết sản phẩm
+            $('#chitietsanpham img').attr('src', productImage);
+            $('#chitietsanpham .card-title').text(productTitle);
+            $('#chitietsanpham .card-money').text(productPrice);
+            $('#chitietsanpham .card-category').text(productCategory);
 
-                // Dùng async/await để đợi hàm translateText trả về
-                const translatedName = await translateText(product.TenSP, '{{ session('locale', 'vi') }}');
-                const translatedStatus = await translateText(product.TrangThaiSP == 1 ? 'Còn hàng' : 'Hết hàng', '{{ session('locale', 'vi') }}');
-                const translatedCategory = await translateText(product.LoaiSP, '{{ session('locale', 'vi') }}')
-
-                // Cập nhật chi tiết sản phẩm vào khung chi tiết
-                document.querySelector('#chitietsanpham .card-img-top').src = product.AnhSP;
-                document.querySelector('#chitietsanpham .card-title').textContent = translatedName;
-                document.querySelector('#chitietsanpham .badge').textContent = translatedStatus;
-                document.querySelector('#chitietsanpham .badge').classList.remove('bg-success', 'bg-danger');
-                document.querySelector('#chitietsanpham .badge').classList.add(product.TrangThaiSP == 1 ? 'bg-success' : 'bg-danger');
-                document.querySelector('#chitietsanpham .card-category').textContent = translatedCategory;
-
-                // Định dạng giá tiền
-                const selectedLocale = '{{ session('locale', 'vi-VN') }}';
-                const currencyMap = {
-                    'en': 'USD',
-                    'vi': 'VND',
-                    'ja': 'JPY',
-                };
-                const selectedCurrency = currencyMap[selectedLocale] || 'VND';
-                const formattedPrice = new Intl.NumberFormat(selectedLocale, {
-                    style: 'currency',
-                    currency: selectedCurrency
-                }).format(product.GiaBan);
-
-                document.querySelector('#chitietsanpham .card-money').textContent = formattedPrice;
-
-                // Sau khi tải xong sản phẩm hiện tại, tải sản phẩm tiếp theo
-                currentIndex++;
-                setTimeout(loadProductDetails, 5000);  // Chờ 5 giây trước khi tải sản phẩm tiếp theo
-            } catch (error) {
-                console.error('Error loading product:', error);
+            var badgeElement = document.querySelector('#chitietsanpham .badge');
+            if (badgeElement) {
+                badgeElement.textContent = productStatus;
+                badgeElement.classList.remove('bg-success', 'bg-danger');
+                badgeElement.classList.add(productStatus == "Còn hàng" ? 'bg-success' : 'bg-danger');
+            } else {
+                console.error('Không tìm thấy thẻ .badge trong DOM.');
             }
+
+
+            // Hiển thị thẻ chi tiết sản phẩm (có thể thêm hiệu ứng mượt mà nếu muốn)
+            $('#chitietsanpham').show();
         }
 
-        // Gọi hàm loadProductDetails với mã sản phẩm
-        loadProductDetails();
-
-    })
+        // Thiết lập tự động hiển thị lần lượt sản phẩm sau mỗi 3 giây
+        setInterval(function() {
+            showProductDetails(productIndex);
+            productIndex++; // Tăng chỉ số sản phẩm
+            if (productIndex >= totalProducts) {
+                productIndex = 0; // Quay lại sản phẩm đầu tiên nếu hết danh sách
+            }
+        }, 3000); // 3 giây chuyển sản phẩm
+    });
 
 </script>
 

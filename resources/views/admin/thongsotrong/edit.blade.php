@@ -42,7 +42,7 @@
                         <div class="row mb-3">
                             <label for="MauTrong" class="col-sm-2 col-form-label">Màu tròng</label>
                             <div class="col-sm-10">
-                                <input type="color" name="MauTrong" id="MauTrong" value="{{$dc->MauTrong}}" class="form-control">
+                                <input type="color" name="MauTrong" id="MauTrong" value="{{$tr->MauTrong}}" class="form-control">
                                 @if ($errors->has('MauTrong'))
                                     <span class="text-danger">{{ $errors->first('MauTrong') }}</span>
                                 @endif
@@ -51,7 +51,7 @@
                         <div class="row mb-3">
                             <label for="DoRongTrong" class="col-sm-2 col-form-label">Độ rộng tròng</label>
                             <div class="col-sm-10">
-                                <input type="number" step="1" min="40" max="65" name="DoRongTrong" id="DoRongTrong" value="{{$dc->DoRongTrong}}" class="form-control">
+                                <input type="number" step="1" min="40" max="65" name="DoRongTrong" id="DoRongTrong" value="{{$tr->DoRongTrong}}" class="form-control">
                                 @if ($errors->has('DoRongTrong'))
                                     <span class="text-danger">{{ $errors->first('DoRongTrong') }}</span>
                                 @endif
@@ -60,7 +60,7 @@
                         <div class="row mb-3">
                             <label for="DoCaoTrong" class="col-sm-2 col-form-label">Độ cao tròng</label>
                             <div class="col-sm-10">
-                                <input type="text" step="1" min="30" max="55" name="DoCaoTrong" id="DoCaoTrong" value="{{$dc->DoCaoTrong}}" class="form-control">
+                                <input type="text" step="1" min="30" max="55" name="DoCaoTrong" id="DoCaoTrong" value="{{$tr->DoCaoTrong}}" class="form-control">
                                 @if ($errors->has('DoCaoTrong'))
                                     <span class="text-danger">{{ $errors->first('DoCaoTrong') }}</span>
                                 @endif

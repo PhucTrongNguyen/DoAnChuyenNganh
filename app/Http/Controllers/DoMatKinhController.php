@@ -11,7 +11,7 @@ class DoMatKinhController extends Controller
     public function index(){
         $dmk = DoMatKinh::all();
         
-        return view("admin.domatkinhh.review", compact("dmk"));
+        return view("admin.domatkinh.review", compact("dmk"));
     }
     public function create()
     {

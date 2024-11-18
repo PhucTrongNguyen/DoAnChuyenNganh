@@ -101,8 +101,8 @@
                                 <select class="form-select {{ $errors->has('ChucVu') ? 'is-invalid' : '' }}" name="ChucVu" id="ChucVu"
                                     aria-label="Default select example">
                                     <option value="">Chọn chức vụ</option>
-                                    <option value="Quản lý" {{ $item->ChucVu == 'Quản lý' ? 'selected' : '' }}>Quản lý</option>
-                                    <option value="Nhân viên" {{ $item->ChucVu == 'Nhân viên' ? 'selected' : '' }}>Nhân viên</option>
+                                    <option value="Quản lý" {{ $ql->ChucVu == 'Quản lý' ? 'selected' : '' }}>Quản lý</option>
+                                    <option value="Nhân viên" {{ $ql->ChucVu == 'Nhân viên' ? 'selected' : '' }}>Nhân viên</option>
                                     
                                 </select>
                                 @if ($errors->has('ChucVu'))
@@ -127,14 +127,14 @@
                                     <input class="form-check-input" checked type="radio" name="TrangThaiSP" id="TrangThaiSP"
                                         value="1" checked>
                                     <label class="form-check-label" for="TrangThaiSP">
-                                        Có hàng
+                                        Hoạt động
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="TrangThaiSP" id="TrangThaiSP"
                                         value="0">
                                     <label class="form-check-label" for="TrangThaiSP">
-                                        Chưa có hàng
+                                        Chưa hoạt động
                                     </label>
                                 </div>
                                 @else
@@ -142,14 +142,14 @@
                                     <input class="form-check-input" type="radio" name="TrangThaiSP" id="TrangThaiSP"
                                         value="1" checked>
                                     <label class="form-check-label" for="TrangThaiSP">
-                                        Có hàng
+                                        Hoạt động
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" checked type="radio" name="TrangThaiSP" id="TrangThaiSP"
                                         value="0">
                                     <label class="form-check-label" for="TrangThaiSP">
-                                        Chưa có hàng
+                                        Chưa hoạt động
                                     </label>
                                 </div>
                                 @endif
